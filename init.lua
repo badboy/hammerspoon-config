@@ -43,6 +43,7 @@ function makeTweetbotUrl(url)
   elseif string.match(u, "^/search%?") then
     return "tweetbot:" .. string.gsub(u, "q=", "query=")
   else
+    
     return url
   end
 end
@@ -87,4 +88,33 @@ end)
 
 hs.hotkey.bind(hyper, "=", function()
   hs.execute("/usr/local/bin/cliclick kp:volume-up ws:500")
+end)
+
+-- Format URL & title into Markdown link
+hs.hotkey.bind(hyper, "c", function()
+  local url = hs.pasteboard.readString()
+  if url == nil then
+    hs.notify.new({title="Markdown URL", informativeText="Couldn't get text from clipboard"}):send()
+    return
+  end
+
+  hs.notify.new({title="Markdown URL", informativeText="URL copied. Now copy the title."}):send()
+  
+  local title = hs.pasteboard.readString()
+  local runs = 0
+  while title ~= nil and title == url and runs < 10 do -- wait a maximum of 10*500ms = 5s
+    log.i("title is still "..title)
+    hs.timer.usleep(500 * 1000) -- wait 500ms
+    title = hs.pasteboard.readString()
+    runs = runs + 1
+  end
+
+  if title == nil or title == url then
+    hs.notify.new({title="Markdown URL", informativeText="No title copied. Abort."}):send()
+    return
+  end
+
+  md = "[" .. title .. "](" .. url .. ")"
+  hs.pasteboard.setContents(md)
+  hs.notify.new({title="Markdown URL", informativeText="Copied Markdown-formatted URL to clipboard."}):send()
 end)
