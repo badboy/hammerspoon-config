@@ -73,38 +73,18 @@ installAndUse("URLDispatcher", {
   start = true
 })
 
-function volume(param, symbol)
-  local output = hs.audiodevice.defaultOutputDevice()
-  if output ~= nil then
-    local current = math.floor(output:outputVolume() + 0.5)
-    local newVol
-    if param == "down" then
-      newVol = current - 5
-    else
-      newVol = current + 5
-    end
-    if newVol <= 0 then
-      newVol = 0
-      symbol = "🔈"
-    elseif newVol > 100 then
-      newVol = 100
-    end
+hs.hotkey.bind(hyper, "1", function()
+  hs.execute("/usr/local/bin/cliclick kp:brightness-down ws:500")
+end)
 
-    output:setVolume(newVol)
-    local on = math.floor(newVol/10 + 0.5)
-    local off = 10 - on
-    local level = string.rep("⚫️", on)
-    local levelOff = string.rep("⚪️", off)
-    local msg = symbol .. " " .. level .. levelOff
-
-    hs.alert.show(msg, {atScreenEdge = 2, fadeInDuration=0, fadeOutDuration=0, fillColor={white=0, alpha=1}})
-  end
-end
+hs.hotkey.bind(hyper, "2", function()
+  hs.execute("/usr/local/bin/cliclick kp:brightness-up ws:500")
+end)
 
 hs.hotkey.bind(hyper, "8", function()
-  volume("down", "🔉")
+  hs.execute("/usr/local/bin/cliclick kp:volume-down ws:500")
 end)
 
 hs.hotkey.bind(hyper, "9", function()
-  volume("up", "🔊")
+  hs.execute("/usr/local/bin/cliclick kp:volume-up ws:500")
 end)
