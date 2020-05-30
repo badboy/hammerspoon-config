@@ -81,10 +81,10 @@ hs.hotkey.bind(hyper, "2", function()
   hs.execute("/usr/local/bin/cliclick kp:brightness-up ws:500")
 end)
 
-hs.hotkey.bind(hyper, "8", function()
+hs.hotkey.bind(hyper, "-", function()
   hs.execute("/usr/local/bin/cliclick kp:volume-down ws:500")
 end)
 
-hs.hotkey.bind(hyper, "9", function()
+hs.hotkey.bind(hyper, "=", function()
   hs.execute("/usr/local/bin/cliclick kp:volume-up ws:500")
 end)
