@@ -53,7 +53,7 @@ function tweetbot(url)
 end
 
 installAndUse("URLDispatcher", {
-  config = { 
+  config = {
     url_patterns = {
       {"https?://zoom.us/j/",           Zoom},
       {"https?://%w+.zoom.us/j/",       Zoom},
@@ -64,6 +64,42 @@ installAndUse("URLDispatcher", {
       {"https?://twitter.com",          nil, tweetbot},
     },
     default_handler = DefaultBrowser,
-  },  
+  },
   start = true
 })
+
+function volume(param, symbol)
+  local output = hs.audiodevice.defaultOutputDevice()
+  if output ~= nil then
+    local current = math.floor(output:outputVolume() + 0.5)
+    local newVol
+    if param == "down" then
+      newVol = current - 5
+    else
+      newVol = current + 5
+    end
+    if newVol <= 0 then
+      newVol = 0
+      symbol = "🔈"
+    elseif newVol > 100 then
+      newVol = 100
+    end
+
+    output:setVolume(newVol)
+    local on = math.floor(newVol/10 + 0.5)
+    local off = 10 - on
+    local level = string.rep("⚫️", on)
+    local levelOff = string.rep("⚪️", off)
+    local msg = symbol .. " " .. level .. levelOff
+
+    hs.alert.show(msg, {atScreenEdge = 2, fadeInDuration=0, fadeOutDuration=0, fillColor={white=0, alpha=1}})
+  end
+end
+
+hs.hotkey.bind(hyper, "8", function()
+  volume("down", "🔉")
+end)
+
+hs.hotkey.bind(hyper, "9", function()
+  volume("up", "🔊")
+end)
