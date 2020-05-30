@@ -43,7 +43,6 @@ function makeTweetbotUrl(url)
   elseif string.match(u, "^/search%?") then
     return "tweetbot:" .. string.gsub(u, "q=", "query=")
   else
-    
     return url
   end
 end
@@ -74,20 +73,29 @@ installAndUse("URLDispatcher", {
   start = true
 })
 
+-- Simulates pressing a multimedia key on a keyboard
+-- Takes the key string and simulates pressing it for 5 ms then releasing it.
+function mKey(key)
+  local key = string.upper(key)
+  hs.eventtap.event.newSystemKeyEvent(key, true):post()
+  hs.timer.usleep(5)
+  hs.eventtap.event.newSystemKeyEvent(key, false):post()
+end
+
 hs.hotkey.bind(hyper, "1", function()
-  hs.execute("/usr/local/bin/cliclick kp:brightness-down ws:500")
+  mKey("brightness_down")
 end)
 
 hs.hotkey.bind(hyper, "2", function()
-  hs.execute("/usr/local/bin/cliclick kp:brightness-up ws:500")
+  mKey("brightness_up")
 end)
 
 hs.hotkey.bind(hyper, "-", function()
-  hs.execute("/usr/local/bin/cliclick kp:volume-down ws:500")
+  mKey("sound_down")
 end)
 
 hs.hotkey.bind(hyper, "=", function()
-  hs.execute("/usr/local/bin/cliclick kp:volume-up ws:500")
+  mKey("sound_up")
 end)
 
 -- Format URL & title into Markdown link
@@ -99,7 +107,7 @@ hs.hotkey.bind(hyper, "c", function()
   end
 
   hs.notify.new({title="Markdown URL", informativeText="URL copied. Now copy the title."}):send()
-  
+
   local title = hs.pasteboard.readString()
   local runs = 0
   while title ~= nil and title == url and runs < 10 do -- wait a maximum of 10*500ms = 5s
