@@ -12,7 +12,12 @@ end
 
 -- Reload
 hs.hotkey.bind(hyper, "0", function()
-  hs.reload()
+  hs.alert.show("Reloading Hammerspoon config.", {atScreenEdge = 2})
+  -- .reload() kills the Lua engine and restarts it.
+  --  We need to give a bit of time to show the message.
+  hs.timer.doAfter(1, function()
+    hs.reload()
+  end)
 end)
 
 -- Highlight Mouse
