@@ -126,3 +126,14 @@ hs.hotkey.bind(hyper, "c", function()
   hs.pasteboard.setContents(md)
   hs.notify.new({title="Markdown URL", informativeText="Copied Markdown-formatted URL to clipboard."}):send()
 end)
+
+-- Open copied URLs in the default browser.
+--
+-- Useful when some apps only offer to open in the configured default browser,
+-- which is now hammerspoon itself, but you actually want it in e.g. Firefox.
+hs.hotkey.bind(hyper, "o", function()
+  local url = hs.pasteboard.readString()
+  if string.match(url, "http") then
+    hs.urlevent.openURLWithBundle(url, DefaultBrowser)
+  end
+end)
