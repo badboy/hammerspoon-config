@@ -137,3 +137,11 @@ hs.hotkey.bind(hyper, "o", function()
     hs.urlevent.openURLWithBundle(url, DefaultBrowser)
   end
 end)
+
+-- Always move new Zoom windows to the MBP screen
+local wf = hs.window.filter
+local zoomWins = wf.new(false):setAppFilter('zoom.us')
+zoomWins:subscribe(wf.windowCreated, function(window)
+  local builtin = hs.screen.find("Color LCD")
+  window:moveToScreen(builtin)
+end)
