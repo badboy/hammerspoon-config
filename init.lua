@@ -98,6 +98,10 @@ hs.hotkey.bind(hyper, "=", function()
   mKey("sound_up")
 end)
 
+hs.hotkey.bind(hyper, "8", function()
+  mKey("play")
+end)
+
 -- Format URL & title into Markdown link
 hs.hotkey.bind(hyper, "c", function()
   local url = hs.pasteboard.readString()
