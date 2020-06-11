@@ -102,6 +102,16 @@ hs.hotkey.bind(hyper, "8", function()
   mKey("play")
 end)
 
+-- Focus Calendar
+hs.hotkey.bind(hyper, "b", function()
+   hs.application.launchOrFocus("Calendar")
+end)
+
+-- Focus Mail
+hs.hotkey.bind(hyper, "n", function()
+   hs.application.launchOrFocus("Mail")
+end)
+
 -- Format URL & title into Markdown link
 hs.hotkey.bind(hyper, "c", function()
   local url = hs.pasteboard.readString()
