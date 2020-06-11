@@ -148,7 +148,11 @@ end)
 hs.hotkey.bind(hyper, "o", function()
   local url = hs.pasteboard.readString()
   if string.match(url, "http") then
-    hs.urlevent.openURLWithBundle(url, DefaultBrowser)
+    if string.match(url, "https?://zoom.us/j/") or string.match(url, "https?://%w+.zoom.us/j/") then
+      hs.urlevent.openURLWithBundle(url, Zoom)
+    else
+      hs.urlevent.openURLWithBundle(url, DefaultBrowser)
+    end
   end
 end)
 
