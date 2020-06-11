@@ -150,6 +150,8 @@ hs.hotkey.bind(hyper, "o", function()
   if string.match(url, "http") then
     if string.match(url, "https?://zoom.us/j/") or string.match(url, "https?://%w+.zoom.us/j/") then
       hs.urlevent.openURLWithBundle(url, Zoom)
+    elseif string.match(url, "https?://app.slack.com/") then
+      hs.urlevent.openURLWithBundle(url, Safari)
     else
       hs.urlevent.openURLWithBundle(url, DefaultBrowser)
     end
