@@ -109,7 +109,7 @@ end)
 
 -- Focus Mail
 hs.hotkey.bind(hyper, "n", function()
-   hs.application.launchOrFocus("Mail")
+   hs.application.launchOrFocus("Thunderbird")
 end)
 
 -- Format URL & title into Markdown link
