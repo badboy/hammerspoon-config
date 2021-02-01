@@ -103,7 +103,7 @@ hs.hotkey.bind(hyper, "8", function()
 end)
 
 -- Focus Calendar
-hs.hotkey.bind(hyper, "b", function()
+hs.hotkey.bind(hyper, "v", function()
    hs.application.launchOrFocus("Calendar")
 end)
 
