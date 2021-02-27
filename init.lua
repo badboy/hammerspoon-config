@@ -82,24 +82,24 @@ function mKey(key)
   hs.eventtap.event.newSystemKeyEvent(key, false):post()
 end
 
-hs.hotkey.bind(hyper, "1", function()
+hs.hotkey.bind({}, hs.keycodes.map["F1"], function()
   mKey("brightness_down")
 end)
 
-hs.hotkey.bind(hyper, "2", function()
+hs.hotkey.bind({}, hs.keycodes.map["F2"], function()
   mKey("brightness_up")
 end)
 
-hs.hotkey.bind(hyper, "-", function()
-  mKey("sound_down")
+hs.hotkey.bind({}, hs.keycodes.map["F7"], function()
+  print(hs.execute("/opt/homebrew/bin/mpc prev"))
 end)
 
-hs.hotkey.bind(hyper, "=", function()
-  mKey("sound_up")
+hs.hotkey.bind({}, hs.keycodes.map["F8"], function()
+  print(hs.execute("/opt/homebrew/bin/mpc toggle"))
 end)
 
-hs.hotkey.bind(hyper, "8", function()
-  mKey("play")
+hs.hotkey.bind({}, hs.keycodes.map["F9"], function()
+  print(hs.execute("/opt/homebrew/bin/mpc next"))
 end)
 
 -- Focus Calendar
