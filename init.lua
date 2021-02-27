@@ -1,6 +1,11 @@
 log = hs.logger.new("jer", "info")
 log.i("loading")
 
+-- Trim whitespace of a string, front and back.
+function trim(s)
+   return (s:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 hyper = {"cmd", "ctrl", "shift"}
 
 -- Convenience function to use spoons
@@ -138,6 +143,9 @@ hs.hotkey.bind(hyper, "c", function()
     title = hs.pasteboard.readString()
     runs = runs + 1
   end
+
+  title = trim(title)
+  url = trim(url)
 
   if title == nil or title == url then
     hs.notify.new({title="Markdown URL", informativeText="No title copied. Abort."}):send()
