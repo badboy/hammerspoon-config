@@ -157,6 +157,19 @@ hs.hotkey.bind(hyper, "c", function()
   hs.notify.new({title="Markdown URL", informativeText="Copied Markdown-formatted URL to clipboard."}):send()
 end)
 
+-- Format text in clipboard as todo item
+hs.hotkey.bind(hyper, "t", function()
+  local text = hs.pasteboard.readString()
+  if text == nil then
+    hs.notify.new({title="Todo Item", informativeText="Couldn't get text from clipboard"}):send()
+    return
+  end
+
+  md = "* [ ] " .. trim(text)
+  hs.pasteboard.setContents(md)
+  hs.notify.new({title="Todo Item", informativeText="Copied Markdown-formatted todo item."}):send()
+end)
+
 -- Open copied URLs in the default browser.
 --
 -- Useful when some apps only offer to open in the configured default browser,
