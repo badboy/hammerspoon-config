@@ -102,6 +102,14 @@ hs.hotkey.bind({}, hs.keycodes.map["F9"], function()
   print(hs.execute("/opt/homebrew/bin/mpc next"))
 end)
 
+hs.hotkey.bind({}, hs.keycodes.map["F11"], function()
+  mKey("sound_down")
+end)
+
+hs.hotkey.bind({}, hs.keycodes.map["F12"], function()
+  mKey("sound_up")
+end)
+
 -- Focus Calendar
 hs.hotkey.bind(hyper, "v", function()
    hs.application.launchOrFocus("Calendar")
