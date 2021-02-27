@@ -170,7 +170,7 @@ end)
 local wf = hs.window.filter
 local zoomWins = wf.new(false):setAppFilter('zoom.us')
 zoomWins:subscribe(wf.windowCreated, function(window)
-  local builtin = hs.screen.find("Color LCD")
+  local builtin = hs.screen.allScreens()[2]
   window:moveToScreen(builtin)
   window:setSize(hs.geometry.size(1085, 760))
 end)
