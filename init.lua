@@ -65,13 +65,13 @@ end
 installAndUse("URLDispatcher", {
   config = {
     url_patterns = {
-      {"https?://zoom.us/j/",           Zoom},
-      {"https?://%w+.zoom.us/j/",       Zoom},
-      {"https?://app.slack.com/",       Safari},
-      {"https?://docs.google.com",      DefaultBrowser},
-      {"https?://bugzilla.mozilla.org", DefaultBrowser},
-      {"https?://mobile.twitter.com",   nil, tweetbot},
-      {"https?://twitter.com",          nil, tweetbot},
+      {"^https?://zoom.us/j/",           Zoom},
+      {"^https?://%w+.zoom.us/j/",       Zoom},
+      {"^https?://app.slack.com/",       Safari},
+      {"^https?://docs.google.com",      DefaultBrowser},
+      {"^https?://bugzilla.mozilla.org", DefaultBrowser},
+      {"^https?://mobile.twitter.com",   nil, tweetbot},
+      {"^https?://twitter.com",          nil, tweetbot},
     },
     default_handler = DefaultBrowser,
   },
