@@ -54,7 +54,7 @@ end
 
 function tweetbot(url)
   local newUrl = makeTweetbotUrl(url)
-  log.i("newUrl", newUrl)
+
   if newUrl == url then
     hs.urlevent.openURLWithBundle(url, DefaultBrowser)
   else
@@ -117,12 +117,12 @@ end)
 
 -- Focus Calendar
 hs.hotkey.bind(hyper, "v", function()
-   hs.application.launchOrFocus("Calendar")
+  hs.application.launchOrFocus("Calendar")
 end)
 
 -- Focus Mail
 hs.hotkey.bind(hyper, "n", function()
-   hs.application.launchOrFocus("Thunderbird")
+  hs.application.launchOrFocus("Thunderbird")
 end)
 
 -- Format URL & title into Markdown link
@@ -138,7 +138,6 @@ hs.hotkey.bind(hyper, "c", function()
   local title = hs.pasteboard.readString()
   local runs = 0
   while title ~= nil and title == url and runs < 10 do -- wait a maximum of 10*500ms = 5s
-    log.i("title is still "..title)
     hs.timer.usleep(500 * 1000) -- wait 500ms
     title = hs.pasteboard.readString()
     runs = runs + 1
