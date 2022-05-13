@@ -196,3 +196,21 @@ zoomWins:subscribe(wf.windowCreated, function(window)
   window:setSize(hs.geometry.size(1085, 760))
   --window:setTopLeft(hs.geometry.point(-1300, 644))
 end)
+
+function alignSonosCantata()
+  local sonosApp = hs.application.applicationsForBundleID("com.sonos.macController2")
+  if not sonosApp then return end
+  local sonosWindow = sonosApp[1]:allWindows()[1]
+  sonosWindow:setTopLeft(hs.geometry.point(-1340, 730))
+
+  local cantataApp = hs.application.applicationsForBundleID("mpd.cantata")
+  if not cantataApp then return end
+  local cantataWindow = cantataApp[1]:allWindows()[1]
+  cantataWindow:setTopLeft(hs.geometry.point(-1200, 644))
+  cantataWindow:raise()
+end
+
+-- Position Sonos & Cantata Window correctly on second screen
+hs.hotkey.bind(hyper, ";", function()
+  alignSonosCantata()
+end)
