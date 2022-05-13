@@ -190,7 +190,9 @@ end)
 local wf = hs.window.filter
 local zoomWins = wf.new(false):setAppFilter('zoom.us')
 zoomWins:subscribe(wf.windowCreated, function(window)
-  local builtin = hs.screen.allScreens()[2]
+  -- https://www.hammerspoon.org/docs/hs.screen.html#find
+  local builtin = hs.screen{x=-1,y=0}
   window:moveToScreen(builtin)
   window:setSize(hs.geometry.size(1085, 760))
+  --window:setTopLeft(hs.geometry.point(-1300, 644))
 end)
