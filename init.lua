@@ -29,38 +29,8 @@ end)
 installAndUse("MouseCircle", { hotkeys = { show = {hyper, "M"}}})
 
 local DefaultBrowser = "org.mozilla.nightly"
-local Tweetbot = "com.tapbots.Tweetbot3Mac"
 local Zoom = "us.zoom.xos"
 local Safari = "com.apple.Safari"
-
-function makeTweetbotUrl(url)
-  local u = url
-  local u = string.gsub(u, "https?://www%.twitter%.com", "")
-  local u = string.gsub(u, "https?://mobile%.twitter%.com", "")
-  local u = string.gsub(u, "https?://twitter%.com", "")
-  local u = string.gsub(u, "#!/", "")
-  local u = string.gsub(u, "/statuses/", "/status/")
-
-  if string.match(u, "/status/", 1, true) then
-    return "tweetbot:/" .. u
-  elseif string.match(u, "^/[%w_]+/?$") then
-    return "tweetbot:/user_profile" .. u
-  elseif string.match(u, "^/search%?") then
-    return "tweetbot:" .. string.gsub(u, "q=", "query=")
-  else
-    return url
-  end
-end
-
-function tweetbot(url)
-  local newUrl = makeTweetbotUrl(url)
-
-  if newUrl == url then
-    hs.urlevent.openURLWithBundle(url, DefaultBrowser)
-  else
-    hs.urlevent.openURLWithBundle(newUrl, Tweetbot)
-  end
-end
 
 installAndUse("URLDispatcher", {
   config = {
@@ -70,8 +40,6 @@ installAndUse("URLDispatcher", {
       {"^https?://app.slack.com/",       Safari},
       {"^https?://docs.google.com",      DefaultBrowser},
       {"^https?://bugzilla.mozilla.org", DefaultBrowser},
-      {"^https?://mobile.twitter.com",   nil, tweetbot},
-      {"^https?://twitter.com",          nil, tweetbot},
     },
     default_handler = DefaultBrowser,
   },
