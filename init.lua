@@ -64,30 +64,15 @@ hs.hotkey.bind({}, hs.keycodes.map["F2"], function()
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F7"], function()
-  local iina = hs.application.applicationsForBundleID("com.colliderli.iina")
-  if #iina > 0 then
-    mKey("previous")
-  else
-    hs.execute("/opt/homebrew/bin/mpc prev")
-  end
+  print(hs.execute("/opt/homebrew/bin/mpc prev"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F8"], function()
-  local iina = hs.application.applicationsForBundleID("com.colliderli.iina")
-  if #iina > 0 then
-    mKey("play")
-  else
-    hs.execute("/opt/homebrew/bin/mpc toggle")
-  end
+  print(hs.execute("/opt/homebrew/bin/mpc toggle"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F9"], function()
-  local iina = hs.application.applicationsForBundleID("com.colliderli.iina")
-  if #iina > 0 then
-    mKey("next")
-  else
-    hs.execute("/opt/homebrew/bin/mpc next")
-  end
+  print(hs.execute("/opt/homebrew/bin/mpc next"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F11"], function()
