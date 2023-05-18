@@ -72,15 +72,15 @@ hs.hotkey.bind({}, hs.keycodes.map["F6"], function()
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F7"], function()
-  print(hs.execute("/opt/homebrew/bin/mpc prev"))
+  print(hs.execute("/Users/jer/.nix-profile/bin/mpc prev"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F8"], function()
-  print(hs.execute("/opt/homebrew/bin/mpc toggle"))
+  print(hs.execute("/Users/jer/.nix-profile/bin/mpc toggle"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F9"], function()
-  print(hs.execute("/opt/homebrew/bin/mpc next"))
+  print(hs.execute("/Users/jer/.nix-profile/bin/mpc next"))
 end)
 
 hs.hotkey.bind({}, hs.keycodes.map["F11"], function()
