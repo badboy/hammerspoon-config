@@ -198,27 +198,44 @@ zoomWins:subscribe(wf.windowCreated, function(window)
 end)
 
 function alignSonosCantata()
+  local sonosPos = nil
+  local cantataPos = nil
+  local space = 1
+  local single = false
   -- Only one screen = internal screen = smaller.
   if #hs.screen.allScreens() == 1 then
     sonosPos = {100, 150}
     cantataPos = {250, 70}
+    screen = 1
+    single = true
   else
     sonosPos = {-1340, 730}
     cantataPos = {-1200, 644}
+    screen = hs.screen.find('Built%-in')
   end
 
   local sonosApp = hs.application.applicationsForBundleID("com.sonos.macController2")
-  if not sonosApp then return end
-
-  sonosWindow = wf.new(false):setAppFilter(sonosApp[1]:name()):getWindows()[1]
-  hs.spaces.moveWindowToSpace(sonosWindow, 1)
-  sonosWindow:setTopLeft(hs.geometry.point(sonosPos[1], sonosPos[2]))
+  if #sonosApp > 0 then
+    sonosWindow = wf.new(false):setAppFilter(sonosApp[1]:name()):getWindows()[1]
+    if single then
+      hs.spaces.moveWindowToSpace(sonosWindow, screen)
+    else
+      sonosWindow:moveToScreen(screen)
+    end
+    sonosWindow:setTopLeft(hs.geometry.point(sonosPos[1], sonosPos[2]))
+  end
 
   local cantataApp = hs.application.applicationsForBundleID("mpd.cantata")
-  if not cantataApp then return end
+  if #cantataApp == 0 then return end
+
   cantataWindow = wf.new(false):setAppFilter(cantataApp[1]:name()):getWindows()[1]
-  hs.spaces.moveWindowToSpace(cantataWindow, 1)
+  if single then
+    hs.spaces.moveWindowToSpace(cantataWindow, screen)
+  else
+    cantataWindow:moveToScreen(screen)
+  end
   cantataWindow:setTopLeft(hs.geometry.point(cantataPos[1], cantataPos[2]))
+  cantataWindow:setSize(hs.geometry(nil, nil, 970, 650))
   cantataWindow:raise()
 end
 
