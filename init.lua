@@ -63,6 +63,14 @@ hs.hotkey.bind({}, hs.keycodes.map["F2"], function()
   mKey("brightness_up")
 end)
 
+hs.hotkey.bind({}, hs.keycodes.map["F5"], function()
+  mKey("illumination_down")
+end)
+
+hs.hotkey.bind({}, hs.keycodes.map["F6"], function()
+  mKey("illumination_up")
+end)
+
 hs.hotkey.bind({}, hs.keycodes.map["F7"], function()
   print(hs.execute("/opt/homebrew/bin/mpc prev"))
 end)
